@@ -10,6 +10,7 @@
 			integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
 			crossorigin="anonymous"
 		/>
+		<link rel="stylesheet" href="css/styles.css" />
 	</head>
 	<body>
 		<div class="container">
@@ -53,56 +54,64 @@
 							></button>
 						</div>
 						<div class="modal-body">
-							<form>
-								<div class="mb-3">
-									<label for="task" class="form-label">Task</label>
+							<form id="addTaskForm">
+								<div class="form-field">
+									<label for="formTask" class="form-label">Task</label>
 									<input
-										class="form-control"
+										id="formTask"
+										class="formTask"
 										type="text"
 										aria-label="to do task"
 									/>
+									<div class="error" id="taskNameErr"></div>
 								</div>
+
+								<div id="errorMessage"></div>
 								<div class="row">
-									<div class="col">
-										<label for="select">Status</label>
-										<select class="form-select" id="select">
+									<div class="form-field col">
+										<label for="formStatus">Status</label>
+										<select class="formStatus" id="formStatus">
 											<option selected>Choose...</option>
 											<option value="todo">To Do</option>
 											<option value="inprogress">In Progress</option>
 											<option value="done">Done</option>
 										</select>
+										<div class="error" id="taskNameErr"></div>
 									</div>
-									<div class="col">
-										<label for="assignee">Assignee</label>
-										<input type="text" class="form-control" id="assignee" />
+									<div class="form-field col">
+										<label for="formAssignee">Assignee</label>
+										<input type="text" class="formAssignee" id="formAssignee" />
+										<div class="error" id="taskNameErr"></div>
 									</div>
-									<div class="col">
-										<label for="assignee">Due</label>
-										<input type="date" class="form-control" id="date" />
+									<div class="form-field col">
+										<label for="formDue">Due</label>
+										<input type="date" class="formDue" id="formDue" />
+										<div class="error" id="taskNameErr"></div>
 									</div>
 								</div>
 
-								<div class="mb-3">
-									<label for="description" class="form-label"
+								<div class="form-field">
+									<label for="formDescription" class="form-label"
 										>Description</label
 									>
 									<textarea
-										class="form-control"
-										id="description"
+										class="formDescription"
+										id="formDescription"
 										rows="3"
 									></textarea>
 								</div>
+								<div class="modal-footer">
+									<button
+										type="submit"
+										class="btn btn-primary"
+										data-bs-dismiss="modal"
+										value="submit"
+									>
+										Add
+									</button>
+									<button type="button" class="btn btn-secondary">Close</button>
+								</div>
 							</form>
-						</div>
-						<div class="modal-footer">
-							<button
-								type="button"
-								class="btn btn-primary"
-								data-bs-dismiss="modal"
-							>
-								Add
-							</button>
-							<button type="button" class="btn btn-secondary">Close</button>
 						</div>
 					</div>
 				</div>
@@ -119,29 +128,47 @@
 						<h1>To Do</h1>
 						<!-- Card Template -->
 						<div class="d-flex justify-content-center">
-							<div class="card" style="width: 18rem">
-								<div class="card-body">
-									<div class="d-flex justify-content-between">
-										<button>Update</button>
-										<button>Delete</button>
+							<ul>
+								<li>
+									<div class="card" style="width: 18rem">
+										<div class="card-body">
+											<div class="d-flex justify-content-between">
+												<button>Update</button>
+												<button>Delete</button>
+											</div>
+											<h5 class="card-title text-start">Card title</h5>
+											<p class="card-text text-start">
+												Some quick example text to build on the card title and
+												make up the bulk of the card's content.
+											</p>
+											<div class="d-flex justify-content-between">
+												<h6>Assignee</h6>
+												<h6>Date</h6>
+											</div>
+										</div>
 									</div>
-									<h5 class="card-title text-start">Card title</h5>
-									<p class="card-text text-start">
-										Some quick example text to build on the card title and make
-										up the bulk of the card's content.
-									</p>
-									<div class="d-flex justify-content-between">
-										<h6>Assignee</h6>
-										<h6>Date</h6>
-									</div>
-								</div>
-							</div>
+								</li>
+							</ul>
 						</div>
 					</div>
 					<!-- In Progess -->
-					<div class="col"><h1>In Progress</h1></div>
+					<div class="col">
+						<h1>In Progress</h1>
+						<div class="d-flex justify-content-center">
+							<ul>
+								<li></li>
+							</ul>
+						</div>
+					</div>
 					<!-- Done -->
-					<div class="col"><h1>Done</h1></div>
+					<div class="col">
+						<h1>Done</h1>
+						<div class="d-flex justify-content-center">
+							<ul>
+								<li></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -151,5 +178,7 @@
 			integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
 			crossorigin="anonymous"
 		></script>
+		<script src="js/taskManager.js"></script>
+		<script src="js/index.js"></script>
 	</body>
 </html>
