@@ -7,19 +7,18 @@ class TaskManager {
 	addTask(
 		taskName,
 		taskAssignee,
-		taskDueDate,
+		dueDate,
 		taskDescription,
 		taskStatus = "todo"
 	) {
 		const newTask = {
 			taskName: taskName,
-			taskAssignee: taskAssignee,
-			taskDueDate: taskDueDate,
-			taskDescription: taskDescription,
 			taskStatus: taskStatus,
+			taskAssignee: taskAssignee,
+			dueDate: dueDate,
+			taskDescription: taskDescription,
 			id: this.currentId++,
 		};
 		return this.tasks.push(newTask);
 	}
 }
-// check

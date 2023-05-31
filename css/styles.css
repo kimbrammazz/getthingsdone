@@ -8,6 +8,30 @@ ul {
 	list-style-type: none;
 }
 
+.form-field {
+	margin-bottom: 5px;
+}
+
+.form-field label {
+	display: block;
+	color: #777;
+	margin-bottom: 5px;
+}
+
+.form-field input {
+	border: solid 2px #f0f0f0;
+	border-radius: 3px;
+	padding: 10px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	display: block;
+	width: 100%;
+}
+
+.form-field input:focus {
+	outline: none;
+}
+
 .form-field.error input {
 	border-color: var(--error-color);
 }
@@ -15,4 +39,7 @@ ul {
 .form-field.success input {
 	border-color: var(--success-color);
 }
-/* check */
+
+.form-field .error {
+	color: var(--error-color);
+}

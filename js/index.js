@@ -1,46 +1,100 @@
 const newTask = new TaskManager();
 
 const newTaskForm = document.querySelector("#addTaskForm");
-const newTaskName = document.querySelector("#formTask");
-const newTaskStatus = document.querySelector("#formStatus");
-const newTaskAssignee = document.querySelector("#formAssignee");
-const newTaskDueDate = document.querySelector("#formDue");
-const newTaskDescription = document.querySelector("#formDescription");
+const taskName = document.querySelector("#taskname");
+const taskStatus = document.querySelector("#taskStatus");
+const taskAssignee = document.querySelector("#taskAssignee");
+const dueDate = document.querySelector("#dueDate");
+const taskDescription = document.querySelector("#taskDescription");
+const submit = document.querySelector("#submit");
 
+//validation
+const setError = (element, message) => {
+	const inputControl = element.parentElement;
+	const errorDisplay = inputControl.querySelector(".error");
+
+	errorDisplay.innerText = message;
+	inputControl.classList.add("error");
+	inputControl.classList.remove("success");
+};
+
+const setSuccess = (element) => {
+	const inputControl = element.parentElement;
+	const errorDisplay = inputControl.querySelector(".error");
+
+	errorDisplay.innerText = "";
+	inputControl.classList.add("success");
+	inputControl.classList.remove("error");
+};
+
+const validateInputs = () => {
+	submit.disable = true;
+	const tasknameValue = taskName.value.trim();
+	const taskstatusValue = taskStatus.value.trim();
+	const taskassigneeValue = taskAssignee.value.trim();
+	const duedateValue = dueDate.value.trim();
+
+	if (tasknameValue === "") {
+		setError(taskName, "A task name is required");
+	} else {
+		setSuccess(taskName);
+		return true;
+	}
+
+	if (taskstatusValue === "Choose...") {
+		setError(taskStatus, "Please set a status");
+	} else {
+		console.log(taskstatusValue);
+		setSuccess(taskStatus);
+		return true;
+	}
+
+	if (taskassigneeValue === "") {
+		setError(taskAssignee, "Please assign a name");
+	} else {
+		setSuccess(taskAssignee);
+		return true;
+	}
+
+	if (duedateValue === "") {
+		setError(dueDate, "When is task due for completion");
+	} else {
+		setSuccess(dueDate);
+		return true;
+	}
+};
+
+//add tasks
 newTaskForm.addEventListener("submit", (e) => {
 	console.log("in form");
+	//prevent the form from submitting
 	e.preventDefault();
 
 	validateInputs();
 
-	console.log(taskName);
+	let validForm = validateInputs();
 
-	newTask.addTask(
-		taskName,
-		taskAssignee,
-		taskDueDate,
-		taskDescription,
-		taskStatus
-	);
+	console.log(validForm);
+	console.log(validateInputs());
 
-	console.log(newTask.tasks);
-	newTaskName.value = "";
-	newTaskAssignee.value = "";
-	newTaskDueDate.value = "";
-	newTaskDescription.value = "";
-	newTaskStatus.value = "";
+	if (!validForm) {
+		submit.disabled = true;
+	} else {
+		submit.disable = false;
+		newTask.addTask(
+			taskName.value,
+			taskAssignee.value,
+			dueDate.value,
+			taskDescription.value,
+			taskStatus.value
+		);
+
+		console.log(newTask.tasks);
+
+		taskName.value = "";
+		taskAssignee.value = "";
+		dueDate.value = "";
+		taskDescription.value = "";
+		taskStatus.value = "";
+	}
 });
-
-// validation
-const showError = (input, message) => {
-	const formField = input.parentElement;
-};
-const validateInputs = () => {
-	const taskName = newTaskName.value;
-	const taskAssignee = newTaskAssignee.value;
-	const taskDueDate = newTaskDueDate.value;
-	const taskDescription = newTaskDescription.value;
-	const taskStatus = newTaskStatus.value;
-};
-
-//check
