@@ -6,7 +6,6 @@ const taskStatus = document.querySelector("#taskStatus");
 const taskAssignee = document.querySelector("#taskAssignee");
 const dueDate = document.querySelector("#dueDate");
 const taskDescription = document.querySelector("#taskDescription");
-const submit = document.querySelector("#submit");
 
 //validation
 const setError = (element, message) => {
@@ -28,7 +27,7 @@ const setSuccess = (element) => {
 };
 
 const validateInputs = () => {
-	submit.disable = true;
+	let valid = true;
 	const tasknameValue = taskName.value.trim();
 	const taskstatusValue = taskStatus.value.trim();
 	const taskassigneeValue = taskAssignee.value.trim();
@@ -36,51 +35,48 @@ const validateInputs = () => {
 
 	if (tasknameValue === "") {
 		setError(taskName, "A task name is required");
+		valid = false;
 	} else {
+		console.log(taskName.parentNode);
 		setSuccess(taskName);
-		return true;
 	}
 
 	if (taskstatusValue === "Choose...") {
 		setError(taskStatus, "Please set a status");
+		valid = false;
 	} else {
-		console.log(taskstatusValue);
 		setSuccess(taskStatus);
-		return true;
 	}
 
 	if (taskassigneeValue === "") {
 		setError(taskAssignee, "Please assign a name");
+		valid = false;
 	} else {
 		setSuccess(taskAssignee);
-		return true;
 	}
 
 	if (duedateValue === "") {
 		setError(dueDate, "When is task due for completion");
+		valid = false;
 	} else {
 		setSuccess(dueDate);
-		return true;
 	}
+	return valid;
 };
 
 //add tasks
+
 newTaskForm.addEventListener("submit", (e) => {
 	console.log("in form");
+
 	//prevent the form from submitting
 	e.preventDefault();
-
-	validateInputs();
 
 	let validForm = validateInputs();
 
 	console.log(validForm);
-	console.log(validateInputs());
 
-	if (!validForm) {
-		submit.disabled = true;
-	} else {
-		submit.disable = false;
+	if (validForm) {
 		newTask.addTask(
 			taskName.value,
 			taskAssignee.value,
@@ -96,5 +92,12 @@ newTaskForm.addEventListener("submit", (e) => {
 		dueDate.value = "";
 		taskDescription.value = "";
 		taskStatus.value = "";
+
+		clearForm();
 	}
 });
+
+const clearForm = () => {
+	let form = document.querySelector("#addTaskForm");
+	form.reset();
+};
