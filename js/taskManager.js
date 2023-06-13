@@ -1,3 +1,31 @@
+let createTaskHtml = (
+	taskName,
+	taskAssignee,
+	dueDate,
+	taskDescription = ""
+) => {
+	const html = `<li class='list-group-item'>
+								<div class="card" style="width: 18rem">
+									<div class="card-body">
+										<div class="d-flex justify-content-between">
+											<button>Update</button>
+											<button>Delete</button>
+										</div>
+										<h5 class="card-title text-start">${taskName}</h5>
+										<p class="card-text text-start">
+											${taskDescription}.
+										</p>
+										<div class="d-flex justify-content-between">
+											<h6>${taskAssignee}</h6>
+											<h6>${dueDate}</h6>
+										</div>
+									</div>
+								</div>
+							</li>`;
+
+	return html;
+};
+
 class TaskManager {
 	constructor(currentId = 0) {
 		this.tasks = [];
@@ -20,5 +48,46 @@ class TaskManager {
 			id: this.currentId++,
 		};
 		return this.tasks.push(newTask);
+	}
+
+	render() {
+		// create and array to store the tasks' html
+		let tasksHtmlList = [];
+
+		// loop over tasks and create the html, storing it in the array
+		for (let i = 0; i < this.tasks.length; i++) {
+			//get the current task in the loop
+			let task = this.tasks[i];
+
+			// format the date
+			let date = new Date(task.dueDate);
+			let formattedDate = `${date.getDate()}-${
+				date.getMonth() + 1
+			}-${date.getFullYear()}`;
+
+			// create the task html
+			let taskHtml = createTaskHtml(
+				task.taskName,
+				task.taskStatus,
+				task.taskAssignee,
+				formattedDate,
+				task.taskDescription
+			);
+
+			// push it to the taskHtmlList array
+			tasksHtmlList.push(taskHtml);
+		}
+
+		// Creat the tasksHtml by joining each item in the tasksHtmlList
+		// with a new line in between each item
+		let tasksHtml = tasksHtmlList.join("");
+		console.log(tasksHtml);
+
+		// set the inner html of the taskList on the page
+		const todoList = document.querySelector("#todo");
+		const inprogressList = document.querySelector("#in_progress");
+		const doneList = document.querySelector(".done");
+
+		todoList.innerHTML = tasksHtml;
 	}
 }

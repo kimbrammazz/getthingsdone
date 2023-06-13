@@ -72,7 +72,8 @@
 								<button type="submit " id="submit" class="btn btn-primary" value="submit">
 									Add
 								</button>
-								<button type="button" id="close" class="btn btn-secondary">Close</button>
+								<button type="button" id="close" class="btn btn-secondary"
+									data-bs-dismiss="modal">Close</button>
 							</div>
 
 						</form>
@@ -91,8 +92,8 @@
 					<h1>To Do</h1>
 					<!-- Card Template -->
 					<div class="d-flex justify-content-center">
-						<ul>
-							<li>
+						<ul id="todo">
+							<!-- <li class='list-group-item'>
 								<div class="card" style="width: 18rem">
 									<div class="card-body">
 										<div class="d-flex justify-content-between">
@@ -110,7 +111,7 @@
 										</div>
 									</div>
 								</div>
-							</li>
+							</li> -->
 						</ul>
 					</div>
 				</div>
@@ -118,7 +119,7 @@
 				<div class="col">
 					<h1>In Progress</h1>
 					<div class="d-flex justify-content-center">
-						<ul>
+						<ul class="in_progress">
 							<li></li>
 						</ul>
 					</div>
@@ -127,7 +128,7 @@
 				<div class="col">
 					<h1>Done</h1>
 					<div class="d-flex justify-content-center">
-						<ul>
+						<ul class="done">
 							<li></li>
 						</ul>
 					</div>

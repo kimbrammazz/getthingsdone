@@ -87,6 +87,8 @@ newTaskForm.addEventListener("submit", (e) => {
 
 		console.log(newTask.tasks);
 
+		newTask.render();
+
 		taskName.value = "";
 		taskAssignee.value = "";
 		dueDate.value = "";
@@ -101,3 +103,6 @@ const clearForm = () => {
 	let form = document.querySelector("#addTaskForm");
 	form.reset();
 };
+
+let taskHtml = createTaskHtml("bread", "kim", "2023-10-6", "get some");
+console.log(taskHtml);
