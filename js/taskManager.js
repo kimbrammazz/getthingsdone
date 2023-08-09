@@ -8,8 +8,8 @@ let createTaskHtml = (
 								<div class="card" style="width: 18rem">
 									<div class="card-body">
 										<div class="d-flex justify-content-between">
-											<button>Update</button>
-											<button>Delete</button>
+											<button id="update">Update</button>
+											<button id="delete">Delete</button>
 										</div>
 										<h5 class="card-title text-start">${taskName}</h5>
 										<p class="card-text text-start">
@@ -89,5 +89,24 @@ class TaskManager {
 		const doneList = document.querySelector(".done");
 
 		todoList.innerHTML = tasksHtml;
+	}
+
+	save() {
+		const tasksJson = JSON.stringify(this.tasks);
+		localStorage.setItem("tasks", tasksJson);
+		const currentId = String(this.currentId);
+		localStorage.setItem("currentId", currentId);
+	}
+
+	load() {
+		if (localStorage.getItem("tasks")) {
+			const taskJson = localStorage.getItem("tasks");
+			this.tasks = JSON.parse(taskJson);
+		}
+
+		if (localStorage.getItem("currentId")) {
+			const currentId = localStorage.getItem("currentId");
+			this.currentId = Number(currentId);
+		}
 	}
 }

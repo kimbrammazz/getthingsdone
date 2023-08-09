@@ -67,6 +67,10 @@ const validateInputs = () => {
 //add tasks
 
 newTaskForm.addEventListener("submit", (e) => {
+	newTask.load();
+
+	newTask.render();
+
 	console.log("in form");
 
 	//prevent the form from submitting
@@ -88,6 +92,7 @@ newTaskForm.addEventListener("submit", (e) => {
 		console.log(newTask.tasks);
 
 		newTask.render();
+		newTask.save();
 
 		taskName.value = "";
 		taskAssignee.value = "";
