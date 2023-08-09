@@ -52,7 +52,10 @@ class TaskManager {
 
 	render() {
 		// create and array to store the tasks' html
-		let tasksHtmlList = [];
+		// let tasksHtmlList = [];
+		let todoHtmlList = [];
+		let inProgressHtmlList = [];
+		let doneHtmlList = [];
 
 		// loop over tasks and create the html, storing it in the array
 		for (let i = 0; i < this.tasks.length; i++) {
@@ -75,20 +78,31 @@ class TaskManager {
 			);
 
 			// push it to the taskHtmlList array
-			tasksHtmlList.push(taskHtml);
+			// tasksHtmlList.push(taskHtml);
+			if (task.taskStatus === "todo") {
+				console.log("todo");
+				todoHtmlList.push(taskHtml);
+			} else if (task.taskStatus === "inprogress") {
+				inProgressHtmlList.push(taskHtml);
+			} else if (task.taskStatus === "done") {
+				doneHtmlList.push(taskHtml);
+			}
 		}
 
 		// Creat the tasksHtml by joining each item in the tasksHtmlList
 		// with a new line in between each item
-		let tasksHtml = tasksHtmlList.join("");
-		console.log(tasksHtml);
+		// let tasksHtml = tasksHtmlList.join("");
+		// console.log(tasksHtml);
 
 		// set the inner html of the taskList on the page
 		const todoList = document.querySelector("#todo");
+		todoList.innerHTML = todoHtmlList.join("");
 		const inprogressList = document.querySelector("#in_progress");
-		const doneList = document.querySelector(".done");
+		inprogressList.innerHTML = inProgressHtmlList.join("");
+		const doneList = document.querySelector("#done");
+		doneList.innerHTML = doneHtmlList.join("");
 
-		todoList.innerHTML = tasksHtml;
+		// todoList.innerHTML = tasksHtml;
 	}
 
 	save() {
