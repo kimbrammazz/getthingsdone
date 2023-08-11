@@ -6,6 +6,7 @@ const taskStatus = document.querySelector("#taskStatus");
 const taskAssignee = document.querySelector("#taskAssignee");
 const dueDate = document.querySelector("#dueDate");
 const taskDescription = document.querySelector("#taskDescription");
+const tasksList = document.querySelector("#tasksList");
 
 //validation
 const setError = (element, message) => {
@@ -67,14 +68,14 @@ const validateInputs = () => {
 //add tasks
 
 newTaskForm.addEventListener("submit", (e) => {
+	//prevent the form from submitting
+	e.preventDefault();
+
 	newTask.load();
 
 	newTask.render();
 
 	console.log("in form");
-
-	//prevent the form from submitting
-	e.preventDefault();
 
 	let validForm = validateInputs();
 
@@ -108,6 +109,19 @@ const clearForm = () => {
 	let form = document.querySelector("#addTaskForm");
 	form.reset();
 };
+
+// to update task
+tasksList.addEventListener("click", (e) => {
+	if (e.target.classList.contains("update")) {
+		//get the parent task
+		const parentTask =
+			e.target.parentElement.parentElement.parentElement.parentElement;
+		console.log(parentTask);
+		//open modal
+		// prefill form with old information
+		// update information
+	}
+});
 
 let taskHtml = createTaskHtml("bread", "kim", "2023-10-6", "get some");
 console.log(taskHtml);

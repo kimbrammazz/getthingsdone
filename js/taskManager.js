@@ -8,8 +8,8 @@ let createTaskHtml = (
 								<div class="card" style="width: 18rem">
 									<div class="card-body">
 										<div class="d-flex justify-content-between">
-											<button id="update">Update</button>
-											<button id="delete">Delete</button>
+											<button class="update" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button>
+											<button class="delete">Delete</button>
 										</div>
 										<h5 class="card-title text-start">${taskName}</h5>
 										<p class="card-text text-start">
