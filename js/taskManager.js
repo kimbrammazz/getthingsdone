@@ -2,11 +2,13 @@ let createTaskHtml = (
 	taskName,
 	taskAssignee,
 	dueDate,
-	taskDescription = ""
+	taskDescription,
+	taskStatus,
+	id
 ) => {
 	const html = `<li class='list-group-item'>
 								<div class="card" style="width: 18rem">
-									<div class="card-body">
+									<div id="${id}" class="card-body ${taskStatus}">
 										<div class="d-flex justify-content-between">
 											<button class="update" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button>
 											<button class="delete">Delete</button>
@@ -32,20 +34,14 @@ class TaskManager {
 		this.currentId = currentId;
 	}
 
-	addTask(
-		taskName,
-		taskAssignee,
-		dueDate,
-		taskDescription,
-		taskStatus = "todo"
-	) {
+	addTask(taskName, taskAssignee, dueDate, taskDescription, taskStatus) {
 		const newTask = {
 			taskName: taskName,
-			taskStatus: taskStatus,
 			taskAssignee: taskAssignee,
 			dueDate: dueDate,
 			taskDescription: taskDescription,
-			id: this.currentId++,
+			taskStatus: taskStatus,
+			id: ++this.currentId,
 		};
 		return this.tasks.push(newTask);
 	}
@@ -71,18 +67,19 @@ class TaskManager {
 			// create the task html
 			let taskHtml = createTaskHtml(
 				task.taskName,
-				task.taskStatus,
 				task.taskAssignee,
 				formattedDate,
-				task.taskDescription
+				task.taskDescription,
+				task.taskStatus,
+				task.id
 			);
 
 			// push it to the taskHtmlList array
 			// tasksHtmlList.push(taskHtml);
 			if (task.taskStatus === "todo") {
-				console.log("todo");
 				todoHtmlList.push(taskHtml);
 			} else if (task.taskStatus === "inprogress") {
+				console.log("in progress");
 				inProgressHtmlList.push(taskHtml);
 			} else if (task.taskStatus === "done") {
 				doneHtmlList.push(taskHtml);
@@ -103,6 +100,17 @@ class TaskManager {
 		doneList.innerHTML = doneHtmlList.join("");
 
 		// todoList.innerHTML = tasksHtml;
+	}
+
+	findTaskById(taskId) {
+		for (let task of this._tasks) {
+			if (task.id === taskId) {
+				console.log("get task by id::found task  name is " + task.taskName);
+				return task;
+			}
+		}
+		console.log("task not found");
+		return null;
 	}
 
 	save() {

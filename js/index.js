@@ -116,12 +116,15 @@ tasksList.addEventListener("click", (e) => {
 		//get the parent task
 		const parentTask =
 			e.target.parentElement.parentElement.parentElement.parentElement;
+		const parentTaskId = Number(e.target.parentElement.parentElement.id);
 		console.log(parentTask);
-		//open modal
+		console.log(parentTaskId);
+
 		// prefill form with old information
 		// update information
 	}
 });
 
 let taskHtml = createTaskHtml("bread", "kim", "2023-10-6", "get some");
+
 console.log(taskHtml);
