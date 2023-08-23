@@ -102,15 +102,15 @@ class TaskManager {
 		// todoList.innerHTML = tasksHtml;
 	}
 
-	findTaskById(taskId) {
-		for (let task of this._tasks) {
+	getTaskById(taskId) {
+		let foundTask;
+		for (let task of this.tasks) {
 			if (task.id === taskId) {
 				console.log("get task by id::found task  name is " + task.taskName);
-				return task;
+				foundTask = task;
 			}
 		}
-		console.log("task not found");
-		return null;
+		return foundTask;
 	}
 
 	save() {

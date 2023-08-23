@@ -116,9 +116,10 @@ tasksList.addEventListener("click", (e) => {
 		//get the parent task
 		const parentTask =
 			e.target.parentElement.parentElement.parentElement.parentElement;
-		const parentTaskId = Number(e.target.parentElement.parentElement.id);
 		console.log(parentTask);
-		console.log(parentTaskId);
+		const taskId = Number(e.target.parentElement.parentElement.id);
+		console.log(taskId);
+		newTask.getTaskById(taskId);
 
 		// prefill form with old information
 		// update information
