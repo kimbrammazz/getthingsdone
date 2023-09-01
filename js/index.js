@@ -1,3 +1,5 @@
+/*  how this code works */
+
 const newTask = new TaskManager();
 
 const newTaskForm = document.querySelector("#addTaskForm");
@@ -7,6 +9,8 @@ const taskAssignee = document.querySelector("#taskAssignee");
 const dueDate = document.querySelector("#dueDate");
 const taskDescription = document.querySelector("#taskDescription");
 const tasksList = document.querySelector("#tasksList");
+
+let taskId = 0;
 
 //validation
 const setError = (element, message) => {
@@ -109,22 +113,67 @@ const clearForm = () => {
 	let form = document.querySelector("#addTaskForm");
 	form.reset();
 };
+//set up for updating and deleting tasks
+let todoColumn = document.querySelector("#todo");
+todoColumn.addEventListener("click", updateTaskList);
+
+let inprogressColumn = document.querySelector("#in_progress");
+inprogressColumn.addEventListener("click", updateTaskList);
+
+let doneList = document.querySelector("#done");
+doneList.addEventListener("click", updateTaskList);
+
+// function to populate form fields when updating task
+function populateForm(task) {
+	console.log(task);
+	taskName.value = task.taskName;
+	taskAssignee.value = task.taskAssignee;
+	dueDate.value = task.dueDate;
+	taskDescription.value = task.taskDescription;
+	taskStatus.value = task.taskStatus;
+}
 
 // to update task
-tasksList.addEventListener("click", (e) => {
+
+function updateTaskList(e) {
 	if (e.target.classList.contains("update")) {
 		//get the parent task
 		const parentTask =
 			e.target.parentElement.parentElement.parentElement.parentElement;
 		console.log(parentTask);
-		const taskId = Number(e.target.parentElement.parentElement.id);
+		taskId = Number(e.target.parentElement.parentElement.id);
 		console.log(taskId);
-		newTask.getTaskById(taskId);
+		task = newTask.getTaskById(taskId);
 
 		// prefill form with old information
+		populateForm(task);
 		// update information
+		let updatebtn = document.getElementById("updateTaskBtn");
+		updatebtn.addEventListener("click", updateArray);
 	}
-});
+}
+
+function updateArray() {
+	console.log(`in updateArray function with id of: ${taskId}`);
+
+	let validForm = validateInputs();
+
+	if (validForm) {
+		newTask.updateTask(
+			taskId,
+			taskName.value,
+			taskAssignee.value,
+			dueDate.value,
+			taskDescription.value,
+			taskStatus.value
+		);
+		newTask.save();
+		newTask.render();
+		//reset values
+		updateTaskId = 0;
+		clearForm();
+	}
+}
 
 let taskHtml = createTaskHtml("bread", "kim", "2023-10-6", "get some");
 

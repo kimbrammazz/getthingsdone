@@ -1,3 +1,17 @@
+/*  how this code works 
+
+1. this file will be responsible for managing the tasks in the application  "TaskManager" class 
+2. The "addTask" method adds tasks to an array and increment the id for each entry 
+3. The "render" method: 
+	a) first, we loop through the tasks in the array,
+	b) we take the information in the array and create a card with the "createTaskHtml", which we set as the 
+		innerHTML for each "column"
+4. The "getTaskById" method will loop through the task array, and return a task if the task.id (in the array) 
+	matches the taskId (which we will find in "index.js" by traversing the DOM).
+5. The "updateTask" works similar to the "addTask" method, but creates a new object.
+6. The "save" and "load" methods save the array to the local storage, and then retrieves it.
+*/
+
 let createTaskHtml = (
 	taskName,
 	taskAssignee,
@@ -106,11 +120,26 @@ class TaskManager {
 		let foundTask;
 		for (let task of this.tasks) {
 			if (task.id === taskId) {
+				console.log(task);
 				console.log("get task by id::found task  name is " + task.taskName);
 				foundTask = task;
 			}
 		}
+		console.log(foundTask);
 		return foundTask;
+	}
+
+	updateTask(id, taskName, taskAssignee, dueDate, taskDescription, taskStatus) {
+		console.log("in class update task id" + id);
+		let taskToBeUpdated = this.getTaskById(id);
+		console.log(taskToBeUpdated);
+		console.log("in class update task is" + JSON.stringify(taskToBeUpdated));
+		taskToBeUpdated.id = id;
+		taskToBeUpdated.taskName = taskName;
+		taskToBeUpdated.status = taskStatus;
+		taskToBeUpdated.assignee = taskAssignee;
+		taskToBeUpdated.dueDate = dueDate;
+		taskToBeUpdated.description = taskDescription;
 	}
 
 	save() {
