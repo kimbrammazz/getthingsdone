@@ -1,4 +1,14 @@
-/*  how this code works */
+/*  how this code works 
+1. this file will execute the methods in the "taskManager.js"
+2. Create a new instance of "TaskMangager" so that we can use it's methods
+3. First we select the elements we would like to target e.g the elements in the "add task form" so that we can collect their values
+	and use them for validation.
+4. Set an id variable that we can reference when we need to grab the id from the task card.
+5. The validation functions which will add a class or remove a class depending on a conditional statement
+6. Set an event listener on the add task form add button and call the add, save, and render methods.
+7. In the "updateTaskList" function, traverse the DOM to find the id of the card you want to update.
+8. In the "updateArray" function, use the id found, to update the values of the object with the new values, but keep the id the same.
+*/
 
 const newTask = new TaskManager();
 
