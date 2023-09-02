@@ -8,6 +8,8 @@
 6. Set an event listener on the add task form add button and call the add, save, and render methods.
 7. In the "updateTaskList" function, traverse the DOM to find the id of the card you want to update.
 8. In the "updateArray" function, use the id found, to update the values of the object with the new values, but keep the id the same.
+9. The "deleteTask" function looks for the 'delete' button, and then finds the id of the card clicked to add
+	to the deleteTask method of the taskManager.
 */
 
 const newTask = new TaskManager();
@@ -85,6 +87,9 @@ const validateInputs = () => {
 
 //add tasks
 
+updateButton = document.getElementById("updateTaskBtn");
+updateButton.style.display = "none";
+
 newTaskForm.addEventListener("submit", (e) => {
 	//prevent the form from submitting
 	e.preventDefault();
@@ -114,6 +119,9 @@ newTaskForm.addEventListener("submit", (e) => {
 		dueDate.value = "";
 		taskDescription.value = "";
 		taskStatus.value = "";
+
+		addButton = document.getElementById("submit");
+		addButton.style.display = "block";
 
 		clearForm();
 	}
@@ -150,6 +158,11 @@ function populateForm(task) {
 // to update task
 
 function updateTaskList(e) {
+	updateButton = document.getElementById("updateTaskBtn");
+	updateButton.style.display = "block";
+	addButton = document.getElementById("submit");
+	addButton.style.display = "none";
+
 	if (e.target.classList.contains("update")) {
 		//get the parent task
 		const parentTask =
@@ -202,6 +215,6 @@ function deleteTask(e) {
 	}
 }
 
-let taskHtml = createTaskHtml("bread", "kim", "2023-10-6", "get some");
+// let taskHtml = createTaskHtml("bread", "kim", "2023-10-6", "get some");
 
-console.log(taskHtml);
+// console.log(taskHtml);

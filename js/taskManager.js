@@ -9,6 +9,8 @@
 4. The "getTaskById" method will loop through the task array, and return a task if the task.id (in the array) 
 	matches the taskId (which we will find in "index.js" by traversing the DOM).
 5. The "updateTask" works similar to the "addTask" method, but creates a new object.
+6. The "deleteTask" method will check if the id of the task in the array does not match the id of the card clicked.
+	All tasks that do not match the id of the card clicked, get pushed into a new array.
 6. The "save" and "load" methods save the array to the local storage, and then retrieves it.
 */
 
