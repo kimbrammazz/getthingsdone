@@ -12,6 +12,10 @@
 
 const newTask = new TaskManager();
 
+newTask.load();
+
+newTask.render();
+
 const newTaskForm = document.querySelector("#addTaskForm");
 const taskName = document.querySelector("#taskname");
 const taskStatus = document.querySelector("#taskStatus");
@@ -85,10 +89,6 @@ newTaskForm.addEventListener("submit", (e) => {
 	//prevent the form from submitting
 	e.preventDefault();
 
-	newTask.load();
-
-	newTask.render();
-
 	console.log("in form");
 
 	let validForm = validateInputs();
@@ -123,15 +123,19 @@ const clearForm = () => {
 	let form = document.querySelector("#addTaskForm");
 	form.reset();
 };
+
 //set up for updating and deleting tasks
 let todoColumn = document.querySelector("#todo");
 todoColumn.addEventListener("click", updateTaskList);
+todoColumn.addEventListener("click", deleteTask);
 
 let inprogressColumn = document.querySelector("#in_progress");
 inprogressColumn.addEventListener("click", updateTaskList);
+inprogressColumn.addEventListener("click", deleteTask);
 
 let doneList = document.querySelector("#done");
 doneList.addEventListener("click", updateTaskList);
+doneList.addEventListener("click", deleteTask);
 
 // function to populate form fields when updating task
 function populateForm(task) {
@@ -182,6 +186,19 @@ function updateArray() {
 		//reset values
 		updateTaskId = 0;
 		clearForm();
+	}
+}
+
+function deleteTask(e) {
+	console.log("in delete task");
+	if (e.target.classList.contains("delete")) {
+		const parentTask =
+			e.target.parentElement.parentElement.parentElement.parentElement;
+		console.log(parentTask);
+		taskId = Number(e.target.parentElement.parentElement.id);
+		newTask.deleteTask(taskId);
+		newTask.save();
+		newTask.render();
 	}
 }
 

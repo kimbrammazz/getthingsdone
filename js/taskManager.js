@@ -29,7 +29,7 @@ let createTaskHtml = (
 										</div>
 										<h5 class="card-title text-start">${taskName}</h5>
 										<p class="card-text text-start">
-											${taskDescription}.
+											${taskDescription}
 										</p>
 										<div class="d-flex justify-content-between">
 											<h6>${taskAssignee}</h6>
@@ -136,10 +136,20 @@ class TaskManager {
 		console.log("in class update task is" + JSON.stringify(taskToBeUpdated));
 		taskToBeUpdated.id = id;
 		taskToBeUpdated.taskName = taskName;
-		taskToBeUpdated.status = taskStatus;
-		taskToBeUpdated.assignee = taskAssignee;
+		taskToBeUpdated.taskStatus = taskStatus;
+		taskToBeUpdated.taskAssignee = taskAssignee;
 		taskToBeUpdated.dueDate = dueDate;
-		taskToBeUpdated.description = taskDescription;
+		taskToBeUpdated.taskDescription = taskDescription;
+	}
+
+	deleteTask(taskId) {
+		let newTasks = [];
+		for (let task of this.tasks) {
+			if (task.id !== taskId) {
+				newTasks.push(task);
+			}
+			this.tasks = newTasks;
+		}
 	}
 
 	save() {
