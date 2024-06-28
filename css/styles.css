@@ -43,3 +43,7 @@ ul {
 .form-field .error {
 	color: var(--error-color);
 }
+
+.error {
+	color: var(--error-color);
+}

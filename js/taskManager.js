@@ -4,7 +4,7 @@
 2. The "addTask" method adds tasks to an array and increment the id for each entry 
 3. The "render" method: 
 	a) first, we loop through the tasks in the array,
-	b) we take the information in the array and create a card with the "createTaskHtml", which we set as the 
+	b) we take the information in the array and create a card with the "createTaskHtml" function, which we set as the 
 		innerHTML for each "column"
 4. The "getTaskById" method will loop through the task array, and return a task if the task.id (in the array) 
 	matches the taskId (which we will find in "index.js" by traversing the DOM).
