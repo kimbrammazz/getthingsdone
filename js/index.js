@@ -174,9 +174,13 @@ function updateTaskList(e) {
 
 		// prefill form with old information
 		populateForm(task);
+		// form validation
+		let validForm = validateInputs();
 		// update information
-		let updatebtn = document.getElementById("updateTaskBtn");
-		updatebtn.addEventListener("click", updateArray);
+		if (validForm) {
+			let updatebtn = document.getElementById("updateTaskBtn");
+			updatebtn.addEventListener("click", updateArray);
+		}
 	}
 }
 
