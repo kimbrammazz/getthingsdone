@@ -174,13 +174,10 @@ function updateTaskList(e) {
 
 		// prefill form with old information
 		populateForm(task);
-		// form validation
-		let validForm = validateInputs();
 		// update information
-		if (validForm) {
-			let updatebtn = document.getElementById("updateTaskBtn");
-			updatebtn.addEventListener("click", updateArray);
-		}
+		let updatebtn = document.getElementById("updateTaskBtn");
+		updatebtn.addEventListener("click", updateArray);
+		newTask.render();
 	}
 }
 
@@ -199,7 +196,7 @@ function updateArray() {
 			taskStatus.value
 		);
 		newTask.save();
-		newTask.render();
+		// newTask.render();
 		//reset values
 		updateTaskId = 0;
 		clearForm();
