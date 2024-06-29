@@ -177,7 +177,6 @@ function updateTaskList(e) {
 		// update information
 		let updatebtn = document.getElementById("updateTaskBtn");
 		updatebtn.addEventListener("click", updateArray);
-		newTask.render();
 	}
 }
 
@@ -196,12 +195,22 @@ function updateArray() {
 			taskStatus.value
 		);
 		newTask.save();
-		// newTask.render();
+		newTask.render();
 		//reset values
 		updateTaskId = 0;
 		clearForm();
 	}
 }
+
+// function to reset modal to add task
+function resetModal() {
+	document.getElementById("updateTaskBtn").style.display = "none";
+	document.getElementById("submit").style.display = "block";
+	clearForm();
+}
+
+const reset = document.getElementById("addTaskBtn");
+reset.addEventListener("click", resetModal);
 
 function deleteTask(e) {
 	console.log("in delete task");

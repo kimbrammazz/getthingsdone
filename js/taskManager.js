@@ -63,18 +63,16 @@ class TaskManager {
 	}
 
 	render() {
-		// create an array to store the tasks' html
+		// create and array to store the tasks' html
 		// let tasksHtmlList = [];
 		let todoHtmlList = [];
 		let inProgressHtmlList = [];
 		let doneHtmlList = [];
 
 		// loop over tasks and create the html, storing it in the array
-		// for (let i = 0; i < this.tasks.length; i++)
-		for (let task of this.tasks) {
-			//go throught the array and tasks in the loop
-			// let task = this.tasks[i];
-			// console.log(task);
+		for (let i = 0; i < this.tasks.length; i++) {
+			//get the current task in the loop
+			let task = this.tasks[i];
 
 			// format the date
 			let date = new Date(task.dueDate);
@@ -104,7 +102,7 @@ class TaskManager {
 			}
 		}
 
-		// Create the tasksHtml by joining each item in the tasksHtmlList
+		// Creat the tasksHtml by joining each item in the tasksHtmlList
 		// with a new line in between each item
 		// let tasksHtml = tasksHtmlList.join("");
 		// console.log(tasksHtml);
@@ -124,7 +122,7 @@ class TaskManager {
 		let foundTask;
 		for (let task of this.tasks) {
 			if (task.id === taskId) {
-				console.log(task, task.id, taskId);
+				console.log(task);
 				console.log("get task by id::found task  name is " + task.taskName);
 				foundTask = task;
 			}

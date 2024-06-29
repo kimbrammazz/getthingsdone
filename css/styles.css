@@ -32,17 +32,17 @@ ul {
 	outline: none;
 }
 
-.form-field.error input {
+/* .form-field.error input {
 	border-color: var(--error-color);
-}
+} */
 
-.form-field.success input {
+/* .form-field.success input {
 	border-color: var(--success-color);
-}
+} */
 
-.form-field .error {
+/* .form-field .error {
 	color: var(--error-color);
-}
+} */
 
 .error {
 	color: var(--error-color);
